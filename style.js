@@ -1,12 +1,12 @@
-function displayResults(url, name) {
+function displayResults(responseJson) {
 
     console.log(responseJson);
 
     $('#results-list').empty();
 
-    for (let i = 0; i < responseJson.value.length; i++) {
-        $('#results-list').append(`<li><h3>${responesJson.value[i].name}</h3>
-        <a href="${responseJson.value[i].url}"></a>
+    for (let i = 0; i < responseJson.length; i++) {
+        $('#results-list').append(`<li><h3>${responseJson[i].name}</h3>
+        <a href="${responseJson[i].html_url}">${responseJson[i].html_url}</a>
         </li>`)
     }
 
@@ -28,6 +28,8 @@ function getRepos(userHandle) {
         })
         .then(responseJson => displayResults(responseJson))
         .catch(error => {
+            console.error(error)
+
             alert(error.message)
         });
 }
@@ -37,6 +39,7 @@ function watchForm() {
     $('form').submit(event => {
         event.preventDefault();
         let input = $('#user-handle').val();
+        $('#user-handle').val('');
         getRepos(input);
         
     });
