@@ -1,5 +1,6 @@
+// This function displays the results.
 function displayResults(responseJson) {
-
+    // replace the existing image with the new one.
     console.log(responseJson);
 
     $('#results-list').empty();
@@ -9,14 +10,14 @@ function displayResults(responseJson) {
         <a href="${responseJson[i].html_url}">${responseJson[i].html_url}</a>
         </li>`)
     }
-
+    // Displays the results section.
     $('#results').removeClass('hidden');
 };     
 
 
 
 
-
+// This function gets the repos based on the user handle that the user typed in the textbox.
 function getRepos(userHandle) {
     const searchURL = `https://api.github.com/users/${userHandle}/repos`
     
@@ -34,10 +35,11 @@ function getRepos(userHandle) {
         });
 }
 
-
+// This function watches for user input and interaction on the main page.
 function watchForm() {
     $('form').submit(event => {
         event.preventDefault();
+        // Captures user input.
         let input = $('#user-handle').val();
         $('#user-handle').val('');
         getRepos(input);
